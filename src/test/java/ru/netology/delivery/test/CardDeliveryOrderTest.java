@@ -32,12 +32,7 @@ class CardDeliveryTest {
         $("[data-test-id=success-notification]")
                 .shouldBe(Condition.visible, Duration.ofSeconds(15));
         $("[data-test-id=success-notification]")
-                .shouldHave(
-                        Condition.text("Успешно!"),
-                        Condition.text("Встреча успешно запланирована на"),
-                        Condition.text(firstDate)
-                );
-
+                .shouldHave(Condition.text("Успешно!\nВстреча успешно запланирована на " + firstDate));
 
 // меняем дату, отправляем снова
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE, secondDate);
@@ -54,11 +49,6 @@ class CardDeliveryTest {
 //проверка второго уведомления
         $("[data-test-id=success-notification]").should(Condition.appear, Duration.ofSeconds(15));
         $("[data-test-id=success-notification]")
-                .shouldHave(
-                        Condition.text("Успешно!"),
-                        Condition.text("Встреча успешно запланирована на"),
-                        Condition.text(secondDate)
-                );
-
+                .shouldHave(Condition.text("Успешно!\nВстреча успешно запланирована на " + secondDate));
     }
 }

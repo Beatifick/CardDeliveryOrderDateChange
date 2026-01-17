@@ -30,8 +30,14 @@ class CardDeliveryTest {
 
 // проверка первого уведомления
         $("[data-test-id=success-notification]")
-                .shouldBe(Condition.visible, Duration.ofSeconds(15))
-                .shouldHave(Condition.text(firstDate));
+                .shouldBe(Condition.visible, Duration.ofSeconds(15));
+        $("[data-test-id=success-notification]")
+                .shouldHave(
+                        Condition.text("Успешно!"),
+                        Condition.text("Встреча успешно запланирована на"),
+                        Condition.text(firstDate)
+                );
+
 
 // меняем дату, отправляем снова
         $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE, secondDate);
@@ -46,7 +52,13 @@ class CardDeliveryTest {
         replanNotification.$("button.button").click();
 
 //проверка второго уведомления
-        $("[data-test-id=success-notification]").should(Condition.appear, Duration.ofSeconds(15))
-                .shouldHave(Condition.text(secondDate));
+        $("[data-test-id=success-notification]").should(Condition.appear, Duration.ofSeconds(15));
+        $("[data-test-id=success-notification]")
+                .shouldHave(
+                        Condition.text("Успешно!"),
+                        Condition.text("Встреча успешно запланирована на"),
+                        Condition.text(secondDate)
+                );
+
     }
 }
